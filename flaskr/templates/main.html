@@ -1,36 +1,22 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-    <head>
-        <title>{% block page_name %}{{ page_name }}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-</head>
+{% block title %}{{ page_name if page_name else "Cats on Skis" }}{% endblock %}
 
-<body>
-    <!-- The below tag is using Bulma CSS. Try replacing line 14 with line 13. -->
-    <!-- <div class="has-text-success-dark is-size-4  has-text-weight-medium"> -->
-    <div>
-        <a href="{{ url_for('home') }}">
-            Home
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('all_pages') }}">
-            Pages
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('about') }}">
-            About
-        </a>
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <h1 class="title is-3">{{ page_name if page_name else "Welcome to the Wiki!" }}</h1>
+        <p class="content">
+          {% if page_content %}
+            {{ page_content | safe }}
+          {% else %}
+            This is the best place to learn about skiing cats 🐱⛷️.
+          {% endif %}
+        </p>
+      </div>
     </div>
-
-    <!-- The below tag is using Bulma CSS. Try replacing line 30 with line 29. -->
-    <!-- <div class="content"> -->
-    <div>
-        {% block content %}{{ page_content }}{% endblock %}
-    </div>
-
-</body>
-
-</html>
+  </div>
+</section>
+{% endblock %}
